@@ -2,6 +2,13 @@ import cv2
 import time
 import requests
 from datetime import datetime
+# .env ファイルをロードして環境変数へ反映
+from dotenv import load_dotenv
+load_dotenv()
+
+# 環境変数を参照
+import os
+LINE_TOKEN = str(os.getenv('LINE_TOKEN'))
 
 movie = cv2.VideoCapture(0)
 
@@ -14,7 +21,7 @@ detected = 0
 
 def sendMessage(num, count, path):
     url = "https://notify-api.line.me/api/notify" 
-    token = "bwdwyHu7TTye4bDLtfoFdvXqhiQQw6KqOCRj7IzejLE"
+    token = LINE_TOKEN
     headers = {"Authorization" : "Bearer "+ token} 
     if num > 0:
         m = "\n" + str(num) + "人入室しました。"
